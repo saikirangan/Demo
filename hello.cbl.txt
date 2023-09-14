@@ -1,0 +1,39 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID.    PGM03B.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT FILE1 ASSIGN TO DATAFILE
+           ORGANIZATION IS SEQUENTIAL.
+       DATA DIVISION.
+       FILE SECTION.
+       FD FILE1
+           RECORDING MODE IS F.
+       01 FL-REC.
+           05 FL-NUMBER-A PIC 9(5).
+           05 FILLER PIC X(1).
+           05 FL-NUMBER-B PIC 9(5).
+           05 FILLER PIC X(69).
+       WORKING-STORAGE SECTION.
+       01 WS-REC.
+           05 WS-NUMBER-A PIC 9(5).
+           05 WS-NUMBER-B PIC 9(5).
+       01 WS-EOF      PIC X(1) VALUE 'N'.
+       PROCEDURE DIVISION.
+       MAIN-PARA.
+            OPEN INPUT FILE1.
+                 PERFORM READ-PARA UNTIL WS-EOF = 'Y'
+                 CLOSE FILE1
+                 STOP RUN.
+       READ-PARA.
+            READ FILE1
+                AT END MOVE 'Y' TO WS-EOF
+                NOT AT END PERFORM PROCESS-PARA
+            END-READ.
+       PROCESS-PARA.
+            MOVE FL-NUMBER-A TO WS-NUMBER-A.
+            MOVE FL-NUMBER-B TO WS-NUMBER-B.
+            DISPLAY WS-NUMBER-A.
+            DISPLAY WS-NUMBER-B.
+            GOBACK.
+       END-PARA.
