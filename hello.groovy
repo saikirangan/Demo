@@ -1,4 +1,4 @@
- import com.ibm.dbb.build.*
+import com.ibm.dbb.build.*
 //** create PDS **//
 new CreatePDS().dataset("ADCDS.IDZ.COBOL").options("cyl space(1,1) lrecl(80) dsorg(PO) recfm(F,B) dsntype(library) msg(1)").execute()
 new CreatePDS().dataset("ADCDS.IDZ.OBJ").options("cyl space(1,1) lrecl(80) dsorg(PO) recfm(F,B) dsntype(library) msg(1)").execute()
